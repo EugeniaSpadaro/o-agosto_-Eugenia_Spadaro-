@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class Ejercicio_9 {
     /*9)	Realizar un método llamado calcularPromedio, que solicite el ingreso de
     números hasta que se ingrese 0, y que calcule el promedio de los mismos.
-     Se debe utilizar el método ingresarNumero realizado previamente.*/
+     Se debe utilizar el método ingresarNumero realizado previamente.
+     ejercicio de practico 3 metodos parte dos
+     */
 
     public static void main (String args [])
     {
