@@ -1,0 +1,11 @@
+<suite name="TestTestng">
+
+    <test name="Todos los test">
+        <parameter name="specificTag" value="h2"></parameter>
+        <classes>
+            <class name ="test.Practico_12.testngSalesforce"></class>
+            <class name="test.Practico_12.TestWithParameters"></class>
+        </classes>
+    </test>
+
+</suite>

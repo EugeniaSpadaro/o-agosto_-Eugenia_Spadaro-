@@ -1,0 +1,58 @@
+package test.Practico_12;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
+import java.util.List;
+
+public class TestWithParameters {
+
+        private WebDriver driver;
+        private static final String paginaAIngresar = "https://www.spotify.com/uy/";
+        @BeforeMethod
+        public void  inicializarDriver ()
+        {
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Eugi\\Desktop\\Curso de selenium\\chromedriver_win32\\chromedriver.exe");
+            driver = new ChromeDriver();
+            driver.get(paginaAIngresar);
+        }
+        @Parameters ({"specificTag"})
+        @Test
+        public void spotifyTags (@Optional("h2") String tagname)
+        {
+            List <WebElement> elementos = driver.findElements(By.tagName(tagname));
+
+            if (tagname.equalsIgnoreCase("h1"))
+            {
+                System.out.println("Elementos h1");
+            }else if (tagname.equalsIgnoreCase("h2"))
+            {
+                System.out.println("Elementos h2");
+            }else if (tagname.equalsIgnoreCase("h3"))
+            {
+                System.out.println("Elementos h3");
+            }
+
+            if (elementos.size()<0)
+            {
+                System.out.println("No se encontaron elementos");
+            }else
+                {
+                    for (WebElement e: elementos)
+                    {
+                        System.out.println(e.getText());
+                    }
+                }
+
+        }
+
+        @AfterMethod
+        public void cerrarTest ()
+        {
+            driver.close();
+        }
+
+}
