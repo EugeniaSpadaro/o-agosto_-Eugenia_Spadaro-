@@ -1,0 +1,50 @@
+
+package test.Practico_11;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import utilities.GetProperties;
+
+public class Ejercicio_7 {
+
+    private WebDriver driver;
+    private String paginaAIngresar = "https://www.spotify.com/uy/signup/";
+
+    @BeforeTest
+    public void ingresarDrive ()
+    {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Eugi\\Desktop\\Curso de selenium\\chromedriver_win32\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get(paginaAIngresar);
+        driver.manage().window().maximize();
+    }
+    @Test
+    public void spotifyByPlaceHolder () throws InterruptedException {
+
+        driver.findElement(By.cssSelector("input[placeholder='Introduce tu correo electrónico.']")).sendKeys("test158@test.com");
+        driver.findElement(By.cssSelector("input[placeholder='Vuelve a introducir tu correo electrónico.']")).sendKeys("test158@test.com");
+        driver.findElement(By.cssSelector("input[placeholder='Crea una contraseña.']")).sendKeys("PruebaAutomatizaci[on");
+        driver.findElement(By.cssSelector("input[placeholder='Introduce un nombre de perfil.']")).sendKeys("Roberto");
+        driver.findElement(By.cssSelector("input[placeholder='DD']")).sendKeys("05");
+        Select mes = new Select (driver.findElement(By.cssSelector("select[name='month']")));
+        mes.selectByValue("03");
+        driver.findElement(By.cssSelector("input[placeholder='AAAA']")).sendKeys("1990");
+        WebElement mujer = driver.findElement(By.xpath("//*[@id='__next']/main/div[2]/form/div[6]/div[2]/label[2]/span[2]"));
+        mujer.click();
+        WebElement presionarElemento = driver.findElement(By.cssSelector("[class='Label-sc-16kzp0w-0 jkgQwH']"));
+        presionarElemento.click();
+        
+    }
+
+   @AfterTest
+    public void salirDrive ()
+    {
+        driver.close();
+    }
+}
