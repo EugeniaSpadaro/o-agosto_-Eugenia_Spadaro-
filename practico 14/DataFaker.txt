@@ -8,31 +8,31 @@ public class DataFaker {
 
     public static Faker faker = new Faker();
 
-    public static String getFirstName ()
+    public static String getfirstName ()
     {
         String nombre = faker.name().firstName();
         return nombre;
     }
 
-    public static String getLastName ()
+    public static String getlastName ()
     {
         String apellido = faker.name().lastName();
         return apellido;
     }
 
-    public static String GetEmail ()
+    public static String Getemail ()
     {
         String email = faker.internet().emailAddress();
         return email;
     }
 
-    public static String GetTitulo ()
+    public static String Gettitulo ()
     {
         String tituloTrabajo = faker.job().title();
         return tituloTrabajo;
     }
 
-    public static String getPhone ()
+    public static String getphone ()
     {
         Random random = new Random();
         return String.valueOf(random.nextInt(10000)+10000);
@@ -40,3 +40,4 @@ public class DataFaker {
     }
 
 }
+
