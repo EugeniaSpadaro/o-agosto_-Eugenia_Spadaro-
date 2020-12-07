@@ -1,0 +1,75 @@
+package test.Practico_15.PageObjects;
+
+import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+
+public class TelefonicaLandingPage {
+
+    private WebDriver driver;
+
+    public TelefonicaLandingPage(WebDriver adriver)
+    {
+        driver = adriver;
+    }
+
+    public void clickAceptarCookies ()
+    {
+        driver.findElement(By.id("onetrust-accept-btn-handler")).click();
+    }
+
+    public String validarTituloPagina()
+    {
+        return  driver.getTitle();
+    }
+
+    public void validarIframeCotizaciones ()
+    {
+        WebElement iframeCotizaciones = driver.findElement(By.id("euroland-ticker-es"));
+        driver.switchTo().frame(iframeCotizaciones);
+    }
+
+    public String clickEnElemento ()
+    {
+        List<WebElement> buscarTab = driver.findElements(By.className("Tab"));
+        String elementoSeleccionado = "";
+        for (WebElement tabsABuscar: buscarTab)
+        {
+            if (tabsABuscar.getText().equals("NYSE"))
+            {
+                tabsABuscar.click();
+                elementoSeleccionado = tabsABuscar.getText();
+            }
+
+        }
+        return elementoSeleccionado;
+
+    }
+
+    public void ImprimirDatosElementos ()
+    {
+        List <WebElement> dataElement = driver.findElements(By.className("DataItem"));
+        for (WebElement elemetosItem : dataElement)
+        {
+            if (elemetosItem.getText().isEmpty()==false)
+            {
+
+                System.out.println("Los items son: "+elemetosItem.getText());
+            }
+        }
+    }
+    public void ImprimirDatosValor ()
+    {
+        List <WebElement> dataValor = driver.findElements(By.className("DataValue"));
+        for (WebElement elementosValor: dataValor)
+        {
+            if (elementosValor.getText().isEmpty()==false) {
+                System.out.println("Los valores son: " + elementosValor.getText());
+            }
+        }
+    }
+
+}
