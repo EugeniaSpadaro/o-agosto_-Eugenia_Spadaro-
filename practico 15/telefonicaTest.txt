@@ -1,0 +1,51 @@
+package test.Practico_15.Test;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import test.Practico_15.PageObjects.TelefonicaLandingPage;
+
+import java.util.List;
+
+    public class telefonicaTest {
+
+        private WebDriver driver;
+        private String paginaAIngresar = "https://www.telefonica.es/es/";
+        private TelefonicaLandingPage telefonicaLandingPage;
+
+        @BeforeTest
+        public void ingresarDrive ()
+        {
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Eugi\\Desktop\\Curso de selenium\\chromedriver_win32\\chromedriver.exe");
+            driver = new ChromeDriver();
+            driver.get(paginaAIngresar);
+            driver.manage().window().maximize();
+            telefonicaLandingPage = new TelefonicaLandingPage (driver);
+        }
+
+        @Test
+        public void telefonicaTest() throws InterruptedException
+        {
+            Thread.sleep(5000);
+            telefonicaLandingPage.clickAceptarCookies();
+            Assert.assertEquals(telefonicaLandingPage.validarTituloPagina(), "Home | telefonica.es");
+            telefonicaLandingPage.validarIframeCotizaciones();
+            Thread.sleep(5000);
+            Assert.assertEquals(telefonicaLandingPage.clickEnElemento(), "NYSE");
+            telefonicaLandingPage.ImprimirDatosElementos();
+            telefonicaLandingPage.ImprimirDatosValor();
+        }
+
+        @AfterTest
+        public void cerrarDrive ()
+        {
+            driver.close();
+        }
+
+    }
+
