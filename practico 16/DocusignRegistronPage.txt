@@ -1,0 +1,43 @@
+package test.Practico_15.PageObjects.Docusign;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import test.Practico_15.Test.BaseTest;
+
+public class DocusignRegistronPage extends BaseTest {
+
+    public DocusignRegistronPage(WebDriver adriver) {
+
+        driver = adriver;
+    }
+
+    public  void completarCampos ()
+    {
+        driver.findElement(By.name("first_name")).sendKeys("Jhon");
+        driver.findElement(By.name("last_name")).sendKeys("Snow");
+        driver.findElement(By.name("email")).sendKeys("email123@gmail.com");
+        Select industria = new Select (driver.findElement(By.name("ds_industry")));
+        industria.selectByValue("Education");
+    }
+
+    public void enviarFormulario ()
+    {
+        driver.findElement(By.id("submitMainText_0")).click();
+    }
+
+    public WebElement validarMensajeErrorTelefono ()
+    {
+        return driver.findElement(By.id("validation-text-phone"));
+
+    }
+
+    public WebElement validarMansajeErrorTrabajo ()
+    {
+        return driver.findElement(By.id("validation-text-title"));
+    }
+
+
+
+}

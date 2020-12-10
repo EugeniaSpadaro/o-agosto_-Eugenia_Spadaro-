@@ -1,0 +1,36 @@
+package test.Practico_15.PageObjects.Docusign;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import test.Practico_15.Test.BaseTest;
+
+public class DocusignLandingPage extends BaseTest {
+
+
+
+
+
+    public  DocusignLandingPage (WebDriver adriver)
+    {
+        driver = adriver;
+    }
+
+    public String tituloPaginaDocusign ()
+    {
+        return driver.getTitle();
+    }
+
+    public String urlPaginaDocusign ()
+    {
+        return driver.getCurrentUrl();
+    }
+
+    public DocusignRegistronPage clickEnRegistrarse ()
+    {
+        driver.findElement(By.xpath("//*[contains(text(),'Free Trial')]")).click();
+        return new DocusignRegistronPage(driver);
+    }
+
+
+}
