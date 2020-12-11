@@ -1,0 +1,32 @@
+package test.Practico_15.Test;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
+import test.Practico_15.PageObjects.Docusign.DocusignLandingPage;
+import test.Practico_15.PageObjects.Spotify.SpotifyLandingPage;
+
+public class BaseTest {
+
+    protected WebDriver driver;
+    protected String paginaAIngresarDocusing = "https://www.docusign.com/";
+    protected DocusignLandingPage docusignLandingPage;
+    protected String paginaAIngresarSpotify = "https://www.spotify.com/";
+    protected SpotifyLandingPage spotifyLandingPage;
+
+    @BeforeTest
+    public void ingresarDrive ()
+    {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Eugi\\Desktop\\Curso de selenium\\chromedriver_win32\\chromedriver.exe");
+        driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+    }
+
+    @AfterMethod
+    public void cerrarNavegador ()
+    {
+        driver.close();
+    }
+}

@@ -1,0 +1,40 @@
+package test.Practico_15.Test.Docusing;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import test.Practico_10.RegistrationTests;
+import test.Practico_15.PageObjects.Docusign.DocusignLandingPage;
+import test.Practico_15.PageObjects.Docusign.DocusignRegistronPage;
+import test.Practico_15.PageObjects.Spotify.SpotifyLandingPage;
+import test.Practico_15.Test.BaseTest;
+
+import java.util.Base64;
+
+public class DocusingTest extends BaseTest {
+
+    @Test
+    public void docusingTest () throws InterruptedException {
+        driver.get(paginaAIngresarDocusing);
+        docusignLandingPage = new DocusignLandingPage(driver);
+        Assert.assertEquals(docusignLandingPage.tituloPaginaDocusign(),"DocuSign | #1 in Electronic Signature and Agreement Cloud");
+        Assert.assertEquals(docusignLandingPage.urlPaginaDocusign(),"https://www.docusign.com/");
+
+        DocusignRegistronPage docusignRegistronPage =  docusignLandingPage.clickEnRegistrarse();
+        docusignRegistronPage.completarCampos();
+        docusignRegistronPage.enviarFormulario();
+        WebElement mensajeTelefono = docusignRegistronPage.validarMensajeErrorTelefono();
+        WebElement mensajeTrabajo = docusignRegistronPage.validarMansajeErrorTrabajo();
+        Assert.assertEquals(mensajeTelefono.getText(),"Valid phone # required");
+        System.out.println("mensaje"+mensajeTelefono.getText());
+        Assert.assertEquals(mensajeTrabajo.getText(),"Job title required");
+    }
+
+
+}
