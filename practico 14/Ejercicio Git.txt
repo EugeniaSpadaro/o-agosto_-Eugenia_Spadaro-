@@ -1,0 +1,65 @@
+package test.Practico_14;
+
+import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import java.util.List;
+
+public class Ejercicio_Git {
+
+    private WebDriver driver;
+    private String paginaAIngresar = "https://login.salesforce.com/?locale=eu";
+    private static Faker faker = new Faker();
+
+    @BeforeTest
+    public void ingresarDrive ()
+    {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Eugi\\Desktop\\Curso de selenium\\chromedriver_win32\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get(paginaAIngresar);
+        driver.manage().window().maximize();
+    }
+
+    @Test
+    public void  fillFormWithFakersTest () throws InterruptedException {
+        driver.findElement(By.id("signup_link")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.id("onetrust-accept-btn-handler")).click();
+        WebElement nombre = driver.findElement(By.name("UserFirstName"));
+        nombre.sendKeys(DataFaker.getfirstName());
+        WebElement apellido = driver.findElement(By.name("UserLastName"));
+        apellido.sendKeys(DataFaker.getlastName());
+        WebElement titulo = driver.findElement(By.name("UserTitle"));
+        titulo.sendKeys(DataFaker.Gettitulo());
+        WebElement mail = driver.findElement(By.name("UserEmail"));
+        mail.sendKeys(DataFaker.Getemail());
+        WebElement telefono = driver.findElement(By.name("UserPhone"));
+        telefono.sendKeys(DataFaker.getphone());
+        driver.findElement(By.name("Start my free trial")).click();
+        Thread.sleep(2000);
+        List <WebElement> mensajes = driver.findElements(By.className("error-msg"));
+
+        for (WebElement mostrarMensajes : mensajes)
+        {
+            System.out.println(mostrarMensajes.getText());
+        }
+
+
+
+    }
+
+    @AfterTest
+    public void cerrarDrive ()
+    {
+        driver.close();
+    }
+}
